@@ -14,11 +14,59 @@
 </head>
 
 <body class=" bg-gradient-to-r from-cyan-500 to-blue-500">
+  
+  
+  <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-white opacity-95"></div>
+  
+    <div class="modal-container fixed flex items-center w-full h-full z-50 overflow-y-auto ">
+      
+    <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-black text-sm z-50">
+        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+        </svg>
+        (Esc)
+      </div>
+  
+      <!-- Add margin if you want to see grey behind the modal-->
+      <div class="modal-content container mx-auto h-auto text-left p-4">
+       
+      <!--Title-->
+        <div class="flex flex-col justify-between items-center pb-2">
+          
+        </div>
+  
+        <!--Body-->
+        <div id="fullscreen-form" class="flex flex-row rounded-xl p-4 gap-3 ">
+          <div class="flex align-items-center border-solid border-2 border-indigo-600 rounded-xl ">
+            <img class=" mx-auto rounded-lg mb-6" src="./assets/images/litscape.png">
+          </div>
+          <form id="modalForm" class="border-solid border-2 rounded-xl border-indigo-600 p-4 w-1/2">
+            <h3 class="text-4xl p-4 font-bold">Get Preview Access</h3>
+          <p class="p-4 text-2xl">Drop your email here. Dont worry your information is stored only on localstorage</p>
+            <label id="email-label" class="text-xl p-4 lg:text-2xl">Email:</label>
+            <input id="email-input" type="email" placeholder="your email..." autofocus="autofocus" class="w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl">
+            <button id="modalSubmit" class="modal-close m-4 px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Try It</button>
+          <button class="px-4 bg-transparent p-3 rounded-lg m-4 text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Close</button>
+          </form>
+          
+        
+        
+        <!--Footer-->
+        
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
   <header class="py-4 w-full text-3xl font-mono text-center">
     <img class="w-1/6 mx-auto rounded-lg mb-6" src="./assets/images/litscape.png">
     <h2 class="mb-5">Litscape</h2>
     <!-- add a dark/light toggle -->
   </header>
+
 
   <div class=" flex flex-wrap mx-3 mb-10 px-12">
     <div class="w-full md:w-2/3 mb-2 md:mb-0 px-3">
@@ -36,45 +84,18 @@
   <div class="flex flex-wrap justify-around mx-20 my-6 h-auto" id="tag-list"></div>
 
 
-  <section class="relative overflow-hidden mx-20 rounded-[40px] bg-white px-6 pt-50 py-8">
-    <div
-      class="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-20">
-    </div>
-    <div
-      class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center">
-    </div>
+  <section class="overflow-hidden mx-20  bg-white px-6 pt-50 py-8">
+    <h3
+              class="text-3xl md:text-5xl ">
+              Authors
+              Returned</h3>
+        <div id="author-container" class="flex flex-wrap mx-4 capitalize">
+
+        </div>
+    
 
     </main>
 
-    <develop>
-
-      <section>
-        <!-- The following section shows a more likely type of authour card which can also perhaps connect to an image of the author -->
-        <section class="bg-white"
-          style="background-image: url('flex-ui-assets/elements/pattern-white.svg'); background-position: center;">
-          <div class="container px-1 mx-auto">
-            <h3
-              class="text-3xl md:text-5xl leading-tight text-coolGray-900 my-[40px] font-bold tracking-wider animate-bounce">
-              Authors
-              Returned</h3>
-            <!-- <p class="mb-14 md:mb-24 text-lg md:text-xl text-coolGray-500 font-medium">Your search for <span
-                id="tag"></span>
-              returned the following authors</p> -->
-
-            <div id="author-container" class="flex flex-wrap mx-4 capitalize">
-
-
-            </div>
-          </div>
-        </section>
-        
-        <!-- The following section illustrates a first itteration of an authour card -->
-        
-      </section>
-
-
-  </section>
-  </develop>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
