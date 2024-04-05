@@ -12,14 +12,21 @@ const OPEN_LIBRARY_AUTHOR_URL = "https://openlibrary.org/subjects"
 const quoteList = [];
 
 const LIMIT = 150;
-
+let genres = []
 
 // as a developer, when I call a fetch function for fetchTags it returns a list of 
 // tags that are available at the QUOTES_URL.
 
 
 //this sets up the available genres to use based on the quoteable site. 
-const genres = fetchTags(); //fetches all tages from quoteable site
+
+
+async function startup() {
+    const genres = await fetchTags(); //fetches all tages from quoteable site
+    populateTagList($tagList, return5RandomGenres(genres));
+}
+
+startup();
 
 //this sets the jquery item for the search bar
 $searchBar = $('#search-bs-class');
@@ -31,7 +38,7 @@ $tagList = $('#tag-list');
 
 //this produces 5 random tags from the genre list under the search bar.
 
-populateTagList($tagList, return5RandomGenres(genres));
+
 
 //this function gets a 5 long random list from the whole genres list and appends a button for each of the 5 into the 
 //$tagList jquery div.
@@ -63,7 +70,7 @@ function populateTagList(tagList, genres) {
 }
 //returns 5 random itesm from an array
 function return5RandomGenres(genres) {
-    console.log(genres);
+    console.log("genres to return 5: ", genres);
     let arr = []
     for (let x = 0; x < 5; x++) {
         arr.push(genres[Math.floor(Math.random() * genres.length) + 1]);
