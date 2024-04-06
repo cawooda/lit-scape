@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet"> -->
   <link rel="stylesheet" href="./assets/css/reset.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -71,12 +71,12 @@
   <div class=" flex flex-wrap mx-3 mb-10 px-12">
     <div class="w-full md:w-2/3 mb-2 md:mb-0 px-3">
       <input id="search-bs-class"
-        class="appearance-none capitalize block w-full py-3 px-4 leading-tight text-gray-700 bg-gray-200 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none"
+        class="appearance-none rounded-full capitalize block w-full py-3 px-4 leading-tight text-gray-700 bg-gray-200 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none"
         type="text" placeholder="Search for a genre" value="">
     </div>
     <div class="w-full md:w-1/3 px-3">
       <button id="search-btn"
-        class="inline-block w-full py-3 px-4 leading-none text-blue-600 border border-blue-600 hover:bg-blue-700 hover:text-white rounded shadow">Search</button>
+        class="inline-block w-full py-3 px-4 leading-none text-blue-600 bg-yellow-500 rounded-full border border-blue-600 hover:bg-blue-700 hover:text-white rounded shadow">Search</button>
 
       <!--             <button class="inline-block w-full py-3 px-4 leading-none text-blue-600 bg-yellow-400 border border-blue-600 hover:bg-yellow-100 hover:text-black rounded shadow">Search</button> -->
     </div>
@@ -84,7 +84,7 @@
   <div class="flex flex-wrap justify-around mx-20 my-6 h-auto" id="tag-list"></div>
 
 
-  <section class="overflow-hidden mx-20  bg-white px-6 pt-50 py-8">
+  <section class="overflow-hidden mx-20  rounded-lg bg-white px-6 pt-50 py-8">
     <h3
               class="text-3xl md:text-5xl ">
               Authors
@@ -92,7 +92,14 @@
         <div id="author-container" class="flex flex-wrap mx-4 capitalize">
 
         </div>
+  </section>
+        
+  <footer class="container mx-auto columns-3 mt-6">
+    <section class="w-1/3 break-after-column"><h3 class="text-3xl">Footer Information</h3></section>
+    <section class="w-1/3 break-after-column"><h3 class="text-3xl">Footer Information</h3></section>
+    <section class="w-1/3 break-after-column"><h3 class="text-3xl">Footer Information</h3></section>
     
+  </footer>
 
     </main>
 
@@ -101,6 +108,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
   crossorigin="anonymous"></script>
 <script src="./assets/js/dummyData.js"></script>
+<script src="./assets/js/test.js"></script>
 <script src="./assets/js/script.js"></script>
+
 
 </html>

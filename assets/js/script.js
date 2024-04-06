@@ -1,27 +1,39 @@
 const QUOTABLE_URL = "https://api.quotable.io";
-
-const QUOTABLE_TAGS_URL = "https://api.quotable.io/tags";
-
+const QUOTABLE_TAGS_ENDPOINT = "/tags";
 const QUOTES_ENDPOINT = "/quotes";
-
 const OPEN_LIBRARY_BIO_URL = "https://openlibrary.org/authors"
+
 const OPEN_LIBRARY_AUTHOR_URL = "https://openlibrary.org/subjects"
 
-
-
 const quoteList = [];
-
 const LIMIT = 150;
-let genres = []
+const testing = true;
+
+//this sets the jquery item for the search bar
+const $searchBar = $('#search-bs-class');
+
+const $searchButton = $('#search-btn');
+
+//this creates a jquery reference to the tagList below the search bar.
+const $tagList = $('#tag-list');
+
+//this produces 5 random tags from the genre list under the search bar.
+
+
+startup(testing);
 
 // as a developer, when I call a fetch function for fetchTags it returns a list of 
 // tags that are available at the QUOTES_URL.
 
 
+
 //this sets up the available genres to use based on the quoteable site. 
 
-async function startup() {
-    genres = await fetchTags(); //fetches all tages from quoteable site
+async function startup(testing) {
+    if (!testing) {
+        genres = await fetchTags(); //fetches all tages from quoteable site
+    }
+    console.log(genres);
     await populateTagList(return5RandomGenres(genres));
 }
 
@@ -33,15 +45,6 @@ async function update() {
 
 startup();
 
-//this sets the jquery item for the search bar
-$searchBar = $('#search-bs-class');
-
-$searchButton = $('#search-btn');
-
-//this creates a jquery reference to the tagList below the search bar.
-$tagList = $('#tag-list');
-
-//this produces 5 random tags from the genre list under the search bar.
 
 
 
@@ -68,10 +71,10 @@ $searchButton.on('click', function (e) {
 
 function populateTagList(genres) {
 
-    console.log("taglist: ", $tagList);
+    //console.log("taglist: ", $tagList);
     $tagList.empty();
     for (buttonName of genres) {
-        $tagList.append(`<button data-genre="${buttonName}"class="flex-1 mx-5 p-2 rounded-3xl w-auto leading-7 bg-sky-100 hover:bg-sky-600 font-bold capitalize text-center focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 border border-transparent sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
+        $tagList.append(`<button data-genre="${buttonName}"class="flex-1 mx-5 p-2 rounded-3xl w-auto leading-7 text-xl3 bg-sky-100 hover:bg-sky-600 font-bold capitalize text-center focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 border sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
     }
 
 }
@@ -142,7 +145,7 @@ async function fetchAuthors(tag) {
     
     const limit = 150;
     params = `${tag}.json`; //option to add parameters
-    fetchUrl = `https://openlibrary.org/subjects/${params}`
+    fetchUrl = `${OPEN_LIBRARY_AUTHOR_URL}${params}`
 
     let authorList = [];
     const response = await fetch(fetchUrl);
@@ -154,7 +157,7 @@ async function fetchAuthors(tag) {
         let id = dataPoint.authors[0].key.replace("/authors/","");
         authorList.push({name:name,id:id});
     }
-    //console.log("author List ", authorList);
+    console.log("author List ", authorList);
 
     localStorage.setItem(`tag-${tag}`, JSON.stringify(authorList));
     return authorList;
@@ -221,7 +224,7 @@ async function fetchQuotesToAuthor(list) {
 
 
 async function fetchQuotes(author) {
-    fetchUrl = `https://api.quotable.io/quotes?author=${nameToSlug(author)}`;
+    fetchUrl = `${QUOTABLE_TAGS_URL}/quotes?author=${nameToSlug(author)}`;
     let fetchQuotesList = [];
     //console.log("fetch quotes url", fetchUrl);
     const response = await fetch(fetchUrl)
