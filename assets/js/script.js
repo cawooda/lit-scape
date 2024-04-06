@@ -53,6 +53,7 @@ startup();
 
 //event handler that sets a function to handle the button clicks bubling up to the div taglist.
 $tagList.on('click', function (e) {
+    
     const genre = $(e.target).data('genre');
     //set the search bar value
     $searchBar.val(genre);
@@ -66,6 +67,14 @@ $tagList.on('click', function (e) {
 });
 
 $searchButton.on('click', function (e) {
+    e.preventDefault();
+    handleSearch($searchBar.val());
+    $authors.append(`<h2 class = "text text-4xl">searching for greatness...</h2>`);
+    update();
+});
+
+$searchButton.on('submit', function (e) {
+    e.preventDefault();
     handleSearch($searchBar.val());
     $authors.append(`<h2 class = "text text-4xl">searching for greatness...</h2>`);
     update();

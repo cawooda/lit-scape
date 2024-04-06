@@ -38,17 +38,19 @@
   
         <!--Body-->
         <div id="fullscreen-form" class="flex flex-row rounded-xl p-4 gap-3 ">
-          <div class="flex align-items-center border-solid border-2 border-indigo-600 rounded-xl ">
-            <img class=" mx-auto rounded-lg mb-6" src="./assets/images/litscape.png">
+          <div class="flex items-center border-solid border-2 border-indigo-600 rounded-xl ">
+            <img class=" rounded-lg mb-6" src="./assets/images/litscape.png">
           </div>
-          <form id="modalForm" class="border-solid border-2 rounded-xl border-indigo-600 p-4 w-1/2">
-            <h3 class="text-4xl p-4 font-bold">Get Preview Access</h3>
+          <div class="flex flex-col items-center border-solid border-2 border-indigo-600 rounded-xl ">
+          <h3 class="text-4xl p-4 font-bold">Get Preview Access</h3>
           <p class="p-4 text-2xl">Drop your email here. Dont worry your information is stored only on localstorage</p>
-            <label id="email-label" class="text-xl p-4 lg:text-2xl">Email:</label>
-            <input id="email-input" type="email" placeholder="your email..." autofocus="autofocus" class="w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl">
-            <button id="modalSubmit" class="modal-close m-4 px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Try It</button>
-          <button class="px-4 bg-transparent p-3 rounded-lg m-4 text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Close</button>
+          <form id="modalForm" class="flex flex-col items-center w-1/2">
+            <label id="email-label" class="text-xl text-center font-bold p-4 lg:text-2xl">Email:</label>
+            <input id="email-input" type="email" placeholder="your email..." autofocus="autofocus" class="w-full text-center text-grey-800 transition border-2 border-blue-600 rounded-full focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl">
+            <button id="modalSubmit" class=" m-4 px-4 w-full bg-indigo-500 p-3 rounded-full text-white hover:bg-indigo-400">Try It</button>
+          <button class="px-4 bg-transparent modal-close p-3  m-4 text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Close</button>
           </form>
+        </div>
           
         
         
@@ -62,7 +64,7 @@
   
   
   <header class="py-4 w-full text-3xl font-mono text-center">
-    <img class="w-1/6 mx-auto rounded-lg mb-6" src="./assets/images/litscape.png">
+    <img class="w-1/6 mx-auto rounded-full mb-6" src="./assets/images/litscape.png">
     <h2 class="mb-5">Litscape</h2>
     <!-- add a dark/light toggle -->
   </header>
@@ -70,13 +72,15 @@
 
   <div class=" flex flex-wrap mx-3 mb-10 px-12">
     <div class="w-full md:w-2/3 mb-2 md:mb-0 px-3">
+      <form>
       <input id="search-bs-class"
-        class="appearance-none rounded-full capitalize block w-full py-3 px-4 leading-tight text-gray-700 bg-gray-200 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none"
+        class="appearance-none rounded-full capitalize block text-2xl w-full py-3 px-4 leading-tight text-gray-700 bg-gray-200 focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none"
         type="text" placeholder="Search for a genre" value="">
-    </div>
-    <div class="w-full md:w-1/3 px-3">
-      <button id="search-btn"
+      </div>
+        <div class="w-full md:w-1/3 px-3">
+        <button id="search-btn" type="submit"
         class="inline-block w-full py-3 px-4 leading-none text-white text-3xl bg-yellow-500 rounded-full border border-blue-600 hover:bg-blue-700 hover:text-white rounded shadow">Search</button>
+      </form>  
 
       <!--             <button class="inline-block w-full py-3 px-4 leading-none text-blue-600 bg-yellow-400 border border-blue-600 hover:bg-yellow-100 hover:text-black rounded shadow">Search</button> -->
     </div>
