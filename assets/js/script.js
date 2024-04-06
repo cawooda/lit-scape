@@ -16,7 +16,7 @@ const $searchButton = $('#search-btn');
 
 //this creates a jquery reference to the tagList below the search bar.
 const $tagList = $('#tag-list');
-
+const $twitterClick = $('#twitter-click');
 //this produces 5 random tags from the genre list under the search bar.
 
 
@@ -67,14 +67,17 @@ $tagList.on('click', function (e) {
 
 $searchButton.on('click', function (e) {
     handleSearch($searchBar.val());
+    $authors.append(`<h2 class = "text text-4xl">searching for greatness...</h2>`);
+    update();
 });
 
 function populateTagList(genres) {
 
     //console.log("taglist: ", $tagList);
     $tagList.empty();
+    $tagList.append(`<div><h3 class="text-white font-bold text-3xl">Some Ideas...</h3></div>`);
     for (buttonName of genres) {
-        $tagList.append(`<button data-genre="${buttonName}"class="flex-1 mx-5 p-2 rounded-3xl w-auto leading-7 text-xl3 bg-sky-100 hover:bg-sky-600 font-bold capitalize text-center focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 border sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
+        $tagList.append(`<button data-genre="${buttonName}"class="flex-2 mx-5 my-auto p-2 rounded-3xl w-auto leading-7  bg-sky-100 hover:bg-sky-600 font-bold text-xl4 capitalize text-center focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 border sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
     }
 
 }
@@ -267,6 +270,10 @@ function renderAuthorList(authorList) {
 
 //console.log("calling getAuthorsFromWorks(fetchAuthors('science')): ", getAuthorsFromWorks(fetchAuthors('science')));
 //console.log("calling renderAuthorList(getAuthorsFromWorks(fetchAuthors('science'))) ", renderAuthorList(getAuthorsFromWorks(fetchAuthors('science'))));
+function escape (string) {
+    
+}
+
 
 function renderQuotesList(quotesArray, author) {
     //console.log("quotes Array", quotesArray);
@@ -275,9 +282,11 @@ function renderQuotesList(quotesArray, author) {
     for (let x = 0; x < quotesArray.length; x++) {
         const $quoteContainer = $(`<div class="container mx-auto columns-1 mt-2"></div>`);
         const $quote = $(`<p id="quote-${author}-${x}" class="quote text-xl4 mb-4 gap-y-3 leading-loose italic text-coolGray-900 ">${quotesArray[x]}</p>`);
-        const $quoteCopy = $(`<button id="quote-copy-${x} class="class="col-span-2 text-blue-600 bg-yellow-500 hover:bg-yellow-200 rounded-lg w-full sm:w-auto py-2.5 px-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 items-center inline-flex justify-center">copy</button>`); 
+        const $quoteCopy = $(`<button id="quote-copy-${x} class="class="col-span-2 text-blue-900 bg-yellow-300 hover:bg-yellow-200 rounded-lg w-full sm:w-auto py-1 px-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 items-center inline-flex justify-center">copy</button>`); 
         $quoteCopy.on('click',(e) =>{
             navigator.clipboard.writeText(`${quotesArray[x]}`);
+            let quote = quotesArray[x].replace(" ","%20");
+            $twitterClick.attr('href',`https://twitter.com/intent/tweet?text=I%20got%20lit%20%23Litscape%20${quote} -${author}`) 
             let secondsRemaining = 1;
                 $quoteCopy.text(`copied`);
                 $quote.addClass('copied bold');
