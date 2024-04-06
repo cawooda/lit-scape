@@ -20,10 +20,15 @@ let genres = []
 
 //this sets up the available genres to use based on the quoteable site. 
 
-
 async function startup() {
-    const genres = await fetchTags(); //fetches all tages from quoteable site
-    populateTagList($tagList, return5RandomGenres(genres));
+    genres = await fetchTags(); //fetches all tages from quoteable site
+    await populateTagList(return5RandomGenres(genres));
+}
+
+async function update() {
+    console.log("update genres: ", genres);
+    console.log("update return 5: ", return5RandomGenres(genres));
+    populateTagList(return5RandomGenres(genres));
 }
 
 startup();
@@ -50,21 +55,23 @@ $tagList.on('click', function (e) {
     $searchBar.val(genre);
     //trigger a search
     handleSearch($searchBar.val());
+    $authors.append(`<h2 class = "text text-4xl">searching for greatness...</h2>`);
     //delete the button just pressed
     $(e.target).remove();
     //repolulate the taglist.
-    populateTagList($tagList, return5RandomGenres(genres));
+    update();
 });
 
 $searchButton.on('click', function (e) {
     handleSearch($searchBar.val());
 });
 
-function populateTagList(tagList, genres) {
+function populateTagList(genres) {
 
-    tagList.empty();
+    console.log("taglist: ", $tagList);
+    $tagList.empty();
     for (buttonName of genres) {
-        tagList.append(`<button data-genre="${buttonName}"class="flex-1 mx-5 p-2 rounded-3xl w-auto leading-7 bg-sky-100 hover:bg-sky-600 font-bold capitalize text-center focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 border border-transparent sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
+        $tagList.append(`<button data-genre="${buttonName}"class="flex-1 mx-5 p-2 rounded-3xl w-auto leading-7 bg-sky-100 hover:bg-sky-600 font-bold capitalize text-center focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 border border-transparent sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
     }
 
 }
@@ -75,6 +82,7 @@ function return5RandomGenres(genres) {
     for (let x = 0; x < 5; x++) {
         arr.push(genres[Math.floor(Math.random() * genres.length) + 1]);
     }
+    console.log("arr in return: ", arr);
     return arr;
 }
 
@@ -141,12 +149,12 @@ async function fetchAuthors(tag) {
     const data = await response.json();
     //console.log("data.works: ", data.works);      
     for (dataPoint of data.works) {
-        console.log("author Object: ", dataPoint.authors[0]);
+        //console.log("author Object: ", dataPoint.authors[0]);
         let name = dataPoint.authors[0].name.toLowerCase();
         let id = dataPoint.authors[0].key.replace("/authors/","");
         authorList.push({name:name,id:id});
     }
-    console.log("author List ", authorList);
+    //console.log("author List ", authorList);
 
     localStorage.setItem(`tag-${tag}`, JSON.stringify(authorList));
     return authorList;
@@ -155,7 +163,7 @@ async function fetchAuthors(tag) {
 //similar to test code funciton below.    
 async function handleSearch() {
     const term = $searchBar.val();
-    console.log("term:", term)
+    //console.log("term:", term)
     const authorList = await fetchAuthors(term);
     const list = await (fetchQuotesToAuthor(authorList));
     renderAuthorList(list);
@@ -164,7 +172,7 @@ async function handleSearch() {
 /* async function test() {
     let tag = 'science';
     let nameScience = await fetchAuthors(tag);
-    console.log("name science: ",nameScience);
+    //console.log("name science: ",nameScience);
     //console.log("full list called: ", await fullList(nameScience));
     renderAuthorList(await fullList(nameScience));
 } */
@@ -184,13 +192,13 @@ function nameToSlug(name) {
 
 async function fetchQuotesToAuthor(list) {
     let returnArray = [];
-    console.log("full li: ", list);
+    //console.log("full li: ", list);
 
     for (item of list) {
             item.imageUrl = `https://covers.openlibrary.org/a/olid/${item.id}.jpg`,
             item.quotes = await fetchQuotes(nameToSlug(nameToSlug(item.name)))
     }
-        console.log("fetchQuotesToAuthor gives: ", list);
+        //console.log("fetchQuotesToAuthor gives: ", list);
 
     
 
@@ -260,12 +268,12 @@ function renderQuotesList(quotesArray, author) {
     for (let x = 0; x < quotesArray.length; x++) {
         const $quote = $(`<p id="quote-${author}-${x}" class="quote mb-4 gap-y-3 leading-loose italic bold text-coolGray-500 font-medium">${quotesArray[x]}</p>`);
         $returnElement.append($quote);
-        console.log($returnElement);
+        //console.log($returnElement);
     }
 
 
 
-    console.log("return element: ", $returnElement);
+    //console.log("return element: ", $returnElement);
     return $returnElement;
 }
 
@@ -415,7 +423,7 @@ function handleModalSubmit() {
   }
 
   //! added for development
-  if (!!localStorage.getItem('submitted-email')) {
+  if (!localStorage.getItem('submitted-email')) {
     
     toggleModal();
   }
