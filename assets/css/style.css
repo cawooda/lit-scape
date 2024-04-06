@@ -1,3 +1,7 @@
 body {
     font-family: "Questrial", sans-serif;
 }
+
+.copied {
+    background-color: #0EAFD9;
+}

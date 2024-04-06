@@ -105,7 +105,7 @@ async function fetchTags() {
     if (localTags) return localTags ;
 
     params = "?limit=50"; //option to add parameters
-    fetchUrl = `${QUOTABLE_TAGS_URL}${params}`;
+    fetchUrl = `${QUOTABLE_URL}${QUOTABLE_TAGS_ENDPOINT}${params}`;
     let tagList = [];
     let headers = new Headers();
 
@@ -145,7 +145,7 @@ async function fetchAuthors(tag) {
     
     const limit = 150;
     params = `${tag}.json`; //option to add parameters
-    fetchUrl = `${OPEN_LIBRARY_AUTHOR_URL}${params}`
+    fetchUrl = `${OPEN_LIBRARY_AUTHOR_URL}/${params}`
 
     let authorList = [];
     const response = await fetch(fetchUrl);
@@ -224,7 +224,11 @@ async function fetchQuotesToAuthor(list) {
 
 
 async function fetchQuotes(author) {
-    fetchUrl = `${QUOTABLE_TAGS_URL}/quotes?author=${nameToSlug(author)}`;
+    let params = `/quotes?`
+    params = `${params}author=${nameToSlug(author)}`;
+    
+    fetchUrl = `${QUOTABLE_URL}${params}`;
+    console.log(fetchUrl);
     let fetchQuotesList = [];
     //console.log("fetch quotes url", fetchUrl);
     const response = await fetch(fetchUrl)
@@ -269,8 +273,33 @@ function renderQuotesList(quotesArray, author) {
     //console.log("quotes Array author", author);
     $returnElement = $(`<div id="quotes-by-${nameToSlug(author)}"></div>`);
     for (let x = 0; x < quotesArray.length; x++) {
-        const $quote = $(`<p id="quote-${author}-${x}" class="quote mb-4 gap-y-3 leading-loose italic bold text-coolGray-500 font-medium">${quotesArray[x]}</p>`);
-        $returnElement.append($quote);
+        const $quoteContainer = $(`<div class="container mx-auto columns-1 mt-2"></div>`);
+        const $quote = $(`<p id="quote-${author}-${x}" class="quote text-xl4 mb-4 gap-y-3 leading-loose italic text-coolGray-900 ">${quotesArray[x]}</p>`);
+        const $quoteCopy = $(`<button id="quote-copy-${x} class="button-sm">📋</button>`); 
+        $quoteCopy.on('click',(e) =>{
+            navigator.clipboard.writeText(`${quotesArray[x]}`);
+            let secondsRemaining = 2
+
+            const interval = setInterval(() => {
+                // just for presentation
+                $quoteCopy.text(`copied`);
+                $quote.addClass('copied bold');
+
+        // time is up
+            if (secondsRemaining === 0) {
+                clearInterval(interval);
+                $quoteCopy.text(`📋`);
+                $quote.removeClass('copied')
+            }
+
+            secondsRemaining--;
+            }, 1000);
+            
+            
+        })
+        $quoteContainer.append($quote);
+        $quoteContainer.append($quoteCopy);
+        $returnElement.append($quoteContainer);
         //console.log($returnElement);
     }
 
