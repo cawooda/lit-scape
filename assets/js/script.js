@@ -7,7 +7,7 @@ const OPEN_LIBRARY_AUTHOR_URL = "https://openlibrary.org/subjects"
 
 const quoteList = [];
 const LIMIT = 150;
-const testing = true;
+const testing = false;
 
 //this sets the jquery item for the search bar
 const $searchBar = $('#search-bs-class');
@@ -198,7 +198,7 @@ async function fetchQuotesToAuthor(list) {
     //console.log("full li: ", list);
 
     for (item of list) {
-            item.imageUrl = `https://covers.openlibrary.org/a/olid/${item.id}.jpg`,
+            item.imageUrl = `https://covers.openlibrary.org/a/olid/${item.id}-S.jpg`,
             item.quotes = await fetchQuotes(nameToSlug(nameToSlug(item.name)))
     }
         //console.log("fetchQuotesToAuthor gives: ", list);
@@ -275,11 +275,12 @@ function renderQuotesList(quotesArray, author) {
     for (let x = 0; x < quotesArray.length; x++) {
         const $quoteContainer = $(`<div class="container mx-auto columns-1 mt-2"></div>`);
         const $quote = $(`<p id="quote-${author}-${x}" class="quote text-xl4 mb-4 gap-y-3 leading-loose italic text-coolGray-900 ">${quotesArray[x]}</p>`);
-        const $quoteCopy = $(`<button id="quote-copy-${x} class="button-sm">📋</button>`); 
+        const $quoteCopy = $(`<button id="quote-copy-${x} class="class="col-span-2 text-blue-600 bg-yellow-500 hover:bg-yellow-200 rounded-lg w-full sm:w-auto py-2.5 px-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 items-center inline-flex justify-center">copy</button>`); 
         $quoteCopy.on('click',(e) =>{
             navigator.clipboard.writeText(`${quotesArray[x]}`);
-            let secondsRemaining = 2
-
+            let secondsRemaining = 1;
+                $quoteCopy.text(`copied`);
+                $quote.addClass('copied bold');
             const interval = setInterval(() => {
                 // just for presentation
                 $quoteCopy.text(`copied`);
@@ -288,12 +289,12 @@ function renderQuotesList(quotesArray, author) {
         // time is up
             if (secondsRemaining === 0) {
                 clearInterval(interval);
-                $quoteCopy.text(`📋`);
+                $quoteCopy.text(`copy`);
                 $quote.removeClass('copied')
             }
 
             secondsRemaining--;
-            }, 1000);
+            }, 500);
             
             
         })
