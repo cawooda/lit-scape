@@ -294,7 +294,7 @@ function renderQuotesList(quotesArray, author) {
             }
 
             secondsRemaining--;
-            }, 500);
+            }, 200);
             
             
         })
