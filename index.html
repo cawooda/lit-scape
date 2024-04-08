@@ -63,9 +63,24 @@
   
   
   
-  <header class="py-4 w-full text-3xl font-mono text-center">
-    <img class="w-1/6 mx-auto rounded-full mb-6" src="./assets/images/litscape.png">
+  <header class="grid grid-cols-12 py-4 w-full text-3xl font-mono text-center">
+    <div class="col-span-11"><img class="w-1/6 mx-auto rounded-full mb-6" src="./assets/images/litscape.png">
     <h2 class="mb-5">Litscape</h2>
+  </div>
+  <div class="col-span-1">
+    <button id="settings-btn"><svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-8 w-8">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+      </svg></button>
+  </div>
     <!-- add a dark/light toggle -->
   </header>
 
@@ -113,6 +128,28 @@
 </section>
 
     </main>
+    
+    <div id="settings-modal" class="grid opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center bg-blue-200">
+      <form class="form">
+        <h3 class="text-4xl text-center">Settings</h3>
+        <label for="email-input-settings" class="block text-xl font-medium leading-6  text-gray-700 my-4">Email:</label>
+        <input id="email-input-settings" type="email" class="lock w-full rounded-full border-0 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-3xl sm:text-sm sm:leading-6 px-4">
+        
+        <label for="number-of-results" class="block text-xl font-medium leading-6 text-gray-700 my-4">Number of Results</label>
+        <input id="number-of-results-input-settings" type="number" class="lock w-full rounded-full border-0 py-1.5 text-gray-900 shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-3xl sm:text-sm sm:leading-6 px-4">
+        
+        <label for="number-of-results" class="block text-xl font-medium leading-6 text-gray-700 my-4">Recieve Email Updates</label>
+        <div class="grid grid-cols-12 items-center">
+            <input id="get-emails-input-yes" type="checkbox" name="yes" class="grid-span-2 py-4 lock w-full rounded-full">
+            <label for="get-emails-input-yes" class="grid-span-2">Yes</label>
+          
+            <input id="get-emails-input-no" type="checkbox" name="no" class="grid-span-2 py-4 lock w-full rounded-full">
+            <label for="get-emails-input-no" class="grid-span-2">No</label>
+          </div>
+        <button id="submit-settings-btn"class=" m-4 px-4 w-full bg-indigo-500 p-3 rounded-full text-white hover:bg-indigo-400">Save</button>
+        
+      </form>
+    </div>
 
 
 </body>

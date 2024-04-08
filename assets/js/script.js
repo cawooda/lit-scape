@@ -7,11 +7,12 @@ const OPEN_LIBRARY_AUTHOR_URL = "https://openlibrary.org/subjects"
 
 const quoteList = [];
 const LIMIT = 150;
+
+//use to change certain things that help test quicker and prevent fetches
 const testing = false;
 
 //this sets the jquery item for the search bar
 const $searchBar = $('#search-bs-class');
-
 const $searchButton = $('#search-btn');
 
 //this creates a jquery reference to the tagList below the search bar.
@@ -19,15 +20,8 @@ const $tagList = $('#tag-list');
 const $twitterClick = $('#twitter-click');
 //this produces 5 random tags from the genre list under the search bar.
 
-
+//initialises the app
 startup(testing);
-
-// as a developer, when I call a fetch function for fetchTags it returns a list of 
-// tags that are available at the QUOTES_URL.
-
-
-
-//this sets up the available genres to use based on the quoteable site. 
 
 async function startup(testing) {
     if (!testing) {
@@ -40,17 +34,10 @@ async function startup(testing) {
 async function update() {
     console.log("update genres: ", genres);
     console.log("update return 5: ", return5RandomGenres(genres));
-    populateTagList(return5RandomGenres(genres));
+    populateTagList(return5RandomGenres(genres)); //polupates the list of tags below the search with 5 randomly selected genres
 }
 
-startup();
-
-
-
-
-//this function gets a 5 long random list from the whole genres list and appends a button for each of the 5 into the 
-//$tagList jquery div.
-
+//EVENT HANDLERS
 //event handler that sets a function to handle the button clicks bubling up to the div taglist.
 $tagList.on('click', function (e) {
     
@@ -79,6 +66,8 @@ $searchButton.on('submit', function (e) {
     $authors.append(`<h2 class = "text text-4xl">searching for greatness...</h2>`);
     update();
 });
+
+
 
 function populateTagList(genres) {
 
@@ -415,8 +404,49 @@ function fetchBiography(key) {
 }
 
 
-//modal
+//2 modals exist. One is for user registration via emaila nd the other is for settings.
 
+const $settingsButton = $('#settings-btn');
+console.log($settingsButton);
+
+const $settingsModal = $('#settings-modal');
+const $settingsEmailInput = $('#email-input-settings');
+const $numberOfResults = $('#number-of-results-input-settings');
+const $yesToEmails = $('#get-emails-input-yes');
+console.log($yesToEmails.prop('checked'));
+
+const $saveSettingsBtn = $('#submit-settings-btn');
+
+//Settings Modal
+$settingsButton.on('click',(e)=>{
+    console.log("settings clicked");
+    toggleSettings();
+    e.preventDefault();
+});
+
+function toggleSettings () {
+    console.log("settings clicked");
+    $settingsModal.toggleClass('pointer-events-none')
+    $settingsModal.toggleClass('opacity-0')
+    $settingsEmailInput.val(localStorage.getItem('submitted-email'));
+}
+
+$saveSettingsBtn.on('click',(e)=>{
+    e.preventDefault();
+    handleSettings();
+    toggleSettings();
+    
+});
+
+function handleSettings() {
+    localStorage.setItem('submitted-email',$settingsEmailInput.val());
+    localStorage.setItem('number-of-results',$numberOfResults.val()||10);
+    console.log($yesToEmails.prop('checked'));
+    localStorage.setItem('yes-to-emails',$yesToEmails.prop('checked'));
+}
+
+
+//email modal
 $modalForm = $('#modalForm');
 $modalSubmitBtn = $('#modalSubmit');
 $modalSubmitBtn.on('click',handleModalSubmit);
@@ -433,38 +463,15 @@ function handleModalSubmit() {
     toggleModal();
 }
 
-
-
-  var openmodal = document.querySelectorAll('.modal-open')
-  for (var i = 0; i < openmodal.length; i++) {
-    openmodal[i].addEventListener('click', function(event){
-  	event.preventDefault()
-  	//toggleModal()
-    })
-  }
+const overlay = document.querySelector('.modal-overlay')
+overlay.addEventListener('click', toggleModal)
   
-  const overlay = document.querySelector('.modal-overlay')
-  overlay.addEventListener('click', toggleModal)
-  
-  var closemodal = document.querySelectorAll('.modal-close')
-  for (var i = 0; i < closemodal.length; i++) {
+var closemodal = document.querySelectorAll('.modal-close')
+for (var i = 0; i < closemodal.length; i++) {
     closemodal[i].addEventListener('click', toggleModal)
-  }
+}
   
-  document.onkeydown = function(evt) {
-    evt = evt || window.event
-    var isEscape = false
-    if ("key" in evt) {
-  	isEscape = (evt.key === "Escape" || evt.key === "Esc")
-    } else {
-  	isEscape = (evt.keyCode === 27)
-    }
-    if (isEscape && document.body.classList.contains('modal-active')) {
-  	toggleModal()
-    }
-  };
-  
-  
+
   function toggleModal () {
     const body = document.querySelector('body')
     const modal = document.querySelector('.modal')
@@ -473,56 +480,9 @@ function handleModalSubmit() {
     body.classList.toggle('modal-active')
   }
 
-  //! added for development
-  if (!localStorage.getItem('submitted-email')) {
-    
+  
+  if (!localStorage.getItem('submitted-email')) {  
     toggleModal();
   }
 
 
-/*
-function authorListsByGenre(genres) {
-    let authorList = [];
-    for (let x = 0; x < genres.length; x++) {
-        authorList.push({
-            genre: genres[x],
-            authors: [],
-        })
-    }
-    //console.log(authorList);
-    for (x = 0; x < genres.length; x++) {
-        authorList[x].authors.push(fetchAuthors(genres[0]));
-    }
-    //console.log("authour list by genre",authorList);
-    return authorList;
-
-}
- */
-
-//console.log("get authors list by genres ", authorListsByGenre(genres));
-
-/* function getAuthorsFromWorks(works) {
-    //recieves works from an object generated by fetchAuthors(tag) it 
-    //recieves a list of authors related to that tag as an array of {name,key} 
-    //Works is an array of books from a list of authors with a tag.
-    //This function is helpful to turn works into data to be displayed on a card
-    //because it reveals a full list of authors available via the Open Librarby Endpoint
-
-    let authorsArray = [];
-
-    //console.log("works in getAuthorfrom Works: ",works);
-
-    for (work of works) {
-        const bio = fetchBiography(work.key);
-        //console.log("work authour in getAuthorfrom: ",work.name);
-        //console.log("work authorID in getAuthorfrom: ",work.key);
-        authorsArray.push({
-            name: work.name,
-            key: work.key,
-            bio: bio
-        })
-
-    }
-    //console.log("getAuthorsFromWorks Array end: ",authorsArray);
-    return authorsArray;
-} */
