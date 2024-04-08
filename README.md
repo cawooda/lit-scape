@@ -46,8 +46,23 @@ THEN I is see their name and below their name a list of quotes attrbuted to them
 WHEN I click on a specific book, information about the book such as Author, Date Published and Pages long is displayed.
 THEN if the author's name is clicked, below their name a famous quote of theirs pops up.
 
+# Learnings
 
+## Working as a Team
 
+- Know what you are working towards
+- Find out what each person is good at or experienced in.
+- Know what each person is working on. 
+- Ensure code documention helps others understand what you are working on and how it fits in.
+- Make use of project managment tools to track wrork.
+- Code feedback is an important part of all team members understanding the technology and its implementation before its included.
+- Be specific about what the work is, through acceptance criteria, issues, features.
+- Meet often between sessions of work, so that you stay on the same page.
+
+## Technology
+- Frameworks and libraries can be attractive, but their documentation and customisation must be understood and easy to implement. Some have paid and subscription features.
+- Its important to focus on the stage of selecting and comitting to a technology so that consistency is maintained. eg. jquery, vanilla, bootstrap, ui's
+- Developers should see their code as having API' like interfaces with the code of their peers. They may not understand the code, but they should be able to know how to interface with it.
 
 
 
