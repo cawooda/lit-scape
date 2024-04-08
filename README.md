@@ -4,7 +4,7 @@
 ![alt text](./assets/images/screenshot.png "Logo Title Text 1")
 
 # Pitch
-Great influencers and communicators, need to accent and enhance their communication with the weight of great works and minds. Litscape quickly connects communicators with the quotes to accentuate their communication, whether email or socail media.
+Great influencers and communicators, need to accent and enhance their communication with the weight of great works and minds. Litscape quickly connects communicators with the quotes to accentuate their communication, whether email or social media.
 
 # Description
 LitScape that allows the user to search via genre to access a list of quotes from famous authors. These can be easily copied out and used in text or social media.  
