@@ -75,7 +75,7 @@ function populateTagList(genres) {
     $tagList.empty();
     $tagList.append(`<div><h3 class="text-white font-bold text-3xl">Some Ideas...</h3></div>`);
     for (buttonName of genres) {
-        $tagList.append(`<button data-genre="${buttonName}"class="flex-2 mx-5 my-auto p-2 rounded-3xl w-auto leading-7  bg-sky-100 hover:bg-sky-600 font-bold text-xl4 capitalize text-center focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 border sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
+        $tagList.append(`<button data-genre="${buttonName}"class="flex-2 mx-5 my-auto p-2 rounded-3xl w-auto leading-7  bg-sky-100 hover:bg-sky-600 font-bold text-2xl capitalize text-center focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 border sm:mb-4 xs:mb-4 shadow-sm">${buttonName}</button>`)
     }
 
 }
@@ -279,12 +279,12 @@ function renderQuotesList(quotesArray, author) {
     $returnElement = $(`<div id="quotes-by-${nameToSlug(author)}"></div>`);
     for (let x = 0; x < quotesArray.length; x++) {
         const $quoteContainer = $(`<div class="container mx-auto columns-1 mt-2"></div>`);
-        const $quote = $(`<p id="quote-${author}-${x}" class="quote text-xl4 mb-4 gap-y-3 leading-loose italic text-coolGray-900 ">${quotesArray[x]}</p>`);
+        const $quote = $(`<p id="quote-${author}-${x}" class="mb-4 gap-y-3 leading-2 italic text-coolGray-900 text-2xl py-3">${quotesArray[x]}</p>`);
         const $quoteCopy = $(`<button id="quote-copy-${x} class="class="col-span-2 text-blue-900 bg-yellow-300 hover:bg-yellow-200 rounded-lg w-full sm:w-auto py-1 px-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 items-center inline-flex justify-center">copy</button>`); 
         $quoteCopy.on('click',(e) =>{
             navigator.clipboard.writeText(`${quotesArray[x]}`);
             let quote = quotesArray[x].replace(" ","%20");
-            $twitterClick.attr('href',`https://twitter.com/intent/tweet?text=I%20got%20lit%20%23Litscape%20${quote} -${author}`) 
+            $twitterClick.attr('href',`https://twitter.com/intent/tweet?text=I%20got%20lit%20at%20%23Litscape%20${quote} -${author}`) 
             let secondsRemaining = 1;
                 $quoteCopy.text(`copied`);
                 $quote.addClass('copied bold');
