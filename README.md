@@ -65,6 +65,10 @@ THEN if the author's name is clicked, below their name a famous quote of theirs 
 - Developers should see their code as having API' like interfaces with the code of their peers. They may not understand the code, but they should be able to know how to interface with it.
 
 
-
+## Future direction
+Ensuring results are only ones that contain quotes. 
+Broadening the search for quotes.
+Improving the use of localStorage. Currently multiple variables, howver a larger object with an API that interfaces with localstorage would be better.
+Connecting to Books search or links to purchase.
 
 
